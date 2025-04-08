@@ -1,86 +1,41 @@
-import loadHome from './home';
-import loadMenu from './menu';
-import loadAbout from './about';
-import './styles.css'; // Import CSS
+import { pageLoad } from "./pageload"
+import { renderHomePage } from "./home";
+import { renderMenuPage } from "./menu";
+import { renderContactPage } from "./contact";
 
-function createHeader() {
-    const header = document.createElement('header');
+const tabs = document.querySelectorAll("[data-tab-target]");
+const tabContents = document.querySelectorAll("[data-tab-content]");
+const burger = document.querySelector(".hamburger");
 
-    const title = document.createElement('h1');
-    title.textContent = 'The Fancy Fork'; // Example Restaurant Name
+//Hamburger menu
+burger.addEventListener("click", () => {
+  document.querySelector("ul").classList.toggle("active");
+  burger.classList.toggle("toggle");
+});
 
-    const nav = createNav(); // Get the nav element
-
-    header.appendChild(title);
-    header.appendChild(nav);
-    return header;
-}
-
-function setActiveButton(activeButton) {
-    const buttons = document.querySelectorAll('nav button');
-    buttons.forEach(button => button.classList.remove('active'));
-    activeButton.classList.add('active');
-}
-
-function createNav() {
-    const nav = document.createElement('nav');
-
-    const homeButton = document.createElement('button');
-    homeButton.textContent = 'Home';
-    homeButton.addEventListener('click', () => {
-        clearContent();
-        loadHome();
-        setActiveButton(homeButton);
+// Navigation tabs
+tabs.forEach((tab) =>
+  tab.addEventListener("click", () => {
+    const target = document.querySelector(tab.dataset.tabTarget);
+    tabContents.forEach((tabContent) => {
+      tabContent.classList.remove("active");
     });
-
-    const menuButton = document.createElement('button');
-    menuButton.textContent = 'Menu';
-    menuButton.addEventListener('click', () => {
-        clearContent();
-        loadMenu();
-        setActiveButton(menuButton);
+    tabs.forEach((tab) => {
+      tab.classList.remove("red");
     });
+    tab.classList.add("red");
+    target.classList.add("active");
+  })
+);
 
-    const aboutButton = document.createElement('button');
-    aboutButton.textContent = 'About'; // Changed from 'Contact' to match module name
-    aboutButton.addEventListener('click', () => {
-        clearContent();
-        loadAbout();
-        setActiveButton(aboutButton);
-    });
+//Makes sure that menu navigation tab is colored after clicking button
+document.querySelector(".order-now").addEventListener("click", () => {
+  document.querySelector(`[data-tab-target="#menu"]`).classList.add("red");
+});
 
-    nav.appendChild(homeButton);
-    nav.appendChild(menuButton);
-    nav.appendChild(aboutButton);
+//Make sure page doesn't refresh on form submit
+document.querySelector(`[type="submit"]`).addEventListener("click", () => {
+  document.querySelector("form").reset();
+});
 
-    return nav;
-}
-
-function clearContent() {
-    const content = document.getElementById('content');
-    if (content) {
-        content.innerHTML = '';
-    }
-}
-
-function createFooter() {
-    const footer = document.createElement('footer');
-    footer.textContent = '© 2025 The Fancy Fork. All rights reserved.';
-    return footer;
-}
-
-// Initial page setup
-function initializePage() {
-    const contentDiv = document.getElementById('content');
-    const header = createHeader();
-    const footer = createFooter();
-
-    // Insert header before the content div
-    document.body.insertBefore(header, contentDiv);
-    document.body.appendChild(footer);
-
-    // Load the home page content initially
-    loadHome();
-}
-
-initializePage(); // Run setup
+console.log(`Today is ${new Date().toUTCString()}. Very nice.`);
