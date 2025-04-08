@@ -1,4 +1,4 @@
-import { pageLoad } from "./pageload";
+import { createHeader, createFooter } from "./pageload";
 import { renderHomePage } from "./home";
 import { renderMenuPage } from "./menu";
 import { renderContactPage } from "./contact";
@@ -33,12 +33,7 @@ const initializePage = () => {
   const mainContent = createElement("main", ["main-content"]);
 
   // Load initial page content
-  const homeContent = createElement("div", ["tab-content", "active"], {
-    id: "home",
-    "data-tab-content": ""
-  });
   renderHomePage();
-  mainContent.appendChild(homeContent);
 
   // Assemble the page
   contentContainer.appendChild(header);
@@ -50,7 +45,7 @@ const initializePage = () => {
 };
 
 const renderPage = (pageName) => {
-  const mainContent = document.getElementById("main-content");
+  const mainContent = document.querySelector(".main-content");
   if (!mainContent) {
     console.error("Main content container not found");
     return;
@@ -58,12 +53,6 @@ const renderPage = (pageName) => {
 
   // Clear existing content
   mainContent.innerHTML = "";
-
-  // Create new content container
-  const contentDiv = createElement("div", ["tab-content"], {
-    id: pageName,
-    "data-tab-content": ""
-  });
 
   // Render the appropriate page
   switch (pageName) {
@@ -80,10 +69,6 @@ const renderPage = (pageName) => {
       renderHomePage();
       break;
   }
-
-  // Add active class and append to main content
-  contentDiv.classList.add("active");
-  mainContent.appendChild(contentDiv);
 };
 
 const setupEventListeners = () => {
@@ -93,7 +78,7 @@ const setupEventListeners = () => {
   // Hamburger Menu
   const burger = contentContainer.querySelector(".hamburger");
   const navLinks = contentContainer.querySelector(".nav-links");
-  
+
   if (burger && navLinks) {
     burger.addEventListener("click", () => {
       navLinks.classList.toggle("active");
@@ -103,15 +88,15 @@ const setupEventListeners = () => {
 
   // Navigation Tabs
   const tabs = contentContainer.querySelectorAll(".tab");
-  tabs.forEach(tab => {
+  tabs.forEach((tab) => {
     tab.addEventListener("click", (e) => {
       e.preventDefault();
-      
+
       // Get target page from data attribute
       const targetId = tab.dataset.tabTarget?.substring(1) || "home";
-      
+
       // Update tab states
-      tabs.forEach(t => t.classList.remove("active"));
+      tabs.forEach((t) => t.classList.remove("active"));
       tab.classList.add("active");
 
       // Render new page
@@ -128,7 +113,6 @@ const setupEventListeners = () => {
 
 // Initialize the application
 document.addEventListener("DOMContentLoaded", () => {
-  // Initialize the app
   initializePage();
 
   // Optional: Add error handling
@@ -136,40 +120,3 @@ document.addEventListener("DOMContentLoaded", () => {
     console.error("Application Error:", error);
   });
 });
-
-const tabs = document.querySelectorAll("[data-tab-target]");
-const tabContents = document.querySelectorAll("[data-tab-content]");
-const burger = document.querySelector(".hamburger");
-
-// Hamburger menu
-burger.addEventListener("click", () => {
-  document.querySelector("ul").classList.toggle("active");
-  burger.classList.toggle("toggle");
-});
-
-// Navigation tabs
-tabs.forEach((tab) =>
-  tab.addEventListener("click", () => {
-    const target = document.querySelector(tab.dataset.tabTarget);
-    tabContents.forEach((tabContent) => {
-      tabContent.classList.remove("active");
-    });
-    tabs.forEach((tab) => {
-      tab.classList.remove("red");
-    });
-    tab.classList.add("red");
-    target.classList.add("active");
-  })
-);
-
-// Makes sure that menu navigation tab is colored after clicking button
-document.querySelector(".order-now").addEventListener("click", () => {
-  document.querySelector(`[data-tab-target="#menu"]`).classList.add("red");
-});
-
-// Make sure page doesn't refresh on form submit
-document.querySelector(`[type="submit"]`).addEventListener("click", () => {
-  document.querySelector("form").reset();
-});
-
-console.log(`Today is ${new Date().toUTCString()}. Very nice.`);

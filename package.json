@@ -1,7 +1,7 @@
 {
-  "name": "restaurant",
+  "name": "oden-restaurant-page",
   "version": "1.0.0",
-  "description": "",
+  "description": "A simple restaurant page for OdenY",
   "main": "index.js",
   "homepage": "https://abbas-233.github.io/Oden-Restaurant-Page/",
   "scripts": {
@@ -10,12 +10,15 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["restaurant", "oden", "webpage"],
+  "author": "Abbas",
   "license": "ISC",
   "devDependencies": {
     "gh-pages": "^6.3.0",
     "webpack": "^4.44.2",
     "webpack-cli": "^3.3.12"
+  },
+  "dependencies": {
+    "normalize.css": "^8.0.1"
   }
 }
