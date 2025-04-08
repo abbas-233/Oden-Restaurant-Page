@@ -1,0 +1,116 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Tangerine:wght@700&display=swap');
+
+:root {
+    --primary-bg: #fdfaf6; /* Creamy white */
+    --secondary-bg: #e9e0d2; /* Light beige */
+    --dark-brown: #4a2c2a; /* Dark wood/coffee */
+    --accent-red: #8c3838; /* Muted red/burgundy */
+    --text-color: #3d2b1f; /* Dark brown text */
+    --border-color: #d3c5b5; /* Lighter beige border */
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    /* Placeholder background - replace with a real image URL if desired */
+    background-color: var(--secondary-bg); /* Fallback color */
+    background-image: url('https://www.transparenttextures.com/patterns/wood-pattern.png'); /* Example texture */
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+header {
+    background-color: rgba(74, 44, 42, 0.85); /* Semi-transparent dark brown */
+    color: var(--primary-bg);
+    padding: 1.5rem 1rem;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    border-bottom: 3px solid var(--accent-red);
+}
+
+header h1 {
+    font-family: 'Tangerine', cursive;
+    font-size: 3.5em;
+    margin: 0 0 0.5rem 0;
+    font-weight: 700;
+    color: #fff;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+nav button {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    background: transparent;
+    color: var(--primary-bg);
+    border: 2px solid var(--primary-bg);
+    padding: 0.6rem 1.2rem;
+    margin: 0 0.5rem;
+    cursor: pointer;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    font-size: 0.9em;
+}
+
+nav button:hover, nav button.active {
+    background-color: var(--primary-bg);
+    color: var(--dark-brown);
+    border-color: var(--dark-brown);
+}
+
+#content {
+    max-width: 900px;
+    margin: 3rem auto;
+    padding: 2.5rem 3rem;
+    background-color: rgba(253, 250, 246, 0.9); /* Semi-transparent cream */
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--border-color);
+}
+
+#content h2 {
+    font-family: 'Tangerine', cursive;
+    font-size: 2.8em;
+    color: var(--accent-red);
+    text-align: center;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.8rem;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+}
+
+/* Basic styles for content sections */
+.home p, .about p {
+    text-align: center;
+    font-size: 1.1em;
+    color: var(--text-color);
+    margin-bottom: 1rem;
+}
+
+.home img {
+    display: block;
+    max-width: 80%;
+    margin: 1.5rem auto;
+    border-radius: 8px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+}
+
+.menu ul {
+    list-style: none;
+    padding: 0;
+}
+
+.menu li {
+    background-color: rgba(233, 224, 210, 0.7); /* Light beige item background */
+    margin-bottom: 0.8rem;
+    padding: 1rem 1.5rem;
+    border-radius: 6px;
+    border-left: 5px solid var(--accent-red);
+    font-weight: 700;
+    color: var(--dark-brown);
+    transition: transform 0.2s ease;
+}
+
+.menu li:hover {
+    transform: translateX(5px);
+}
