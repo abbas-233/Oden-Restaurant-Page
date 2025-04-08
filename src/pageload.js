@@ -4,19 +4,21 @@ const pageLoad = (() => {
 
   const header = document.createElement("header");
   header.innerHTML = `
-  <nav>
-  <h2>Food-on-a-Plate</h2>
-  <a href="#" class="hamburger">
-    <span class="line line1"></span>
-    <span class="line line2"></span>
-    <span class="line line3"></span>
-  </a>
-  <ul class="links">
-    <li data-tab-target="#home" class="tab red">Home</li>
-    <li data-tab-target="#menu" class="tab">Menu</li>
-    <li data-tab-target="#contact" class="tab">Contact us</li>
-  </ul>
-</nav>`;
+  <nav class="sticky">
+    <h2 class="restaurant-name">OdenY</h2>
+    <ul class="nav-links">
+      <li data-tab-target="#home" class="tab active">Home</li>
+      <li data-tab-target="#menu" class="tab">Menu</li>
+      <li data-tab-target="#contact" class="tab">Contact Us</li>
+    </ul>
+  </nav>`;
 
-    contentContainer.appendChild(header)
+  const footer = document.createElement("footer");
+  footer.innerHTML = `
+    <p>© 2025 OdenY. All rights reserved.</p>
+    <p>123 Culinary Lane, Food City, FC 56789 | (123)-456-7890</p>
+  `;
+
+  contentContainer.appendChild(header);
+  contentContainer.appendChild(footer);
 })();
