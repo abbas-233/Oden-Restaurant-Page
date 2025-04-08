@@ -16,7 +16,12 @@ export default function loadMenu() {
         menuList.appendChild(listItem);
     });
 
+    const image = document.createElement('img');
+    image.src = 'https://via.placeholder.com/600x400'; // Replace with actual image URL
+    image.alt = 'Delicious food';
+
     menuDiv.appendChild(headline);
     menuDiv.appendChild(menuList);
+    menuDiv.appendChild(image);
     content.appendChild(menuDiv);
 }

@@ -10,7 +10,12 @@ export default function loadHome() {
     const description = document.createElement('p');
     description.textContent = 'Enjoy the finest dining experience with us.';
 
+    const image = document.createElement('img');
+    image.src = 'https://via.placeholder.com/600x400'; // Replace with actual image URL
+    image.alt = 'Restaurant interior';
+
     homeDiv.appendChild(headline);
     homeDiv.appendChild(description);
+    homeDiv.appendChild(image);
     content.appendChild(homeDiv);
 }

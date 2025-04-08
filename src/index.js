@@ -16,6 +16,12 @@ function createHeader() {
     return header;
 }
 
+function setActiveButton(activeButton) {
+    const buttons = document.querySelectorAll('nav button');
+    buttons.forEach(button => button.classList.remove('active'));
+    activeButton.classList.add('active');
+}
+
 function createNav() {
     const nav = document.createElement('nav');
 
@@ -24,6 +30,7 @@ function createNav() {
     homeButton.addEventListener('click', () => {
         clearContent();
         loadHome();
+        setActiveButton(homeButton);
     });
 
     const menuButton = document.createElement('button');
@@ -31,6 +38,7 @@ function createNav() {
     menuButton.addEventListener('click', () => {
         clearContent();
         loadMenu();
+        setActiveButton(menuButton);
     });
 
     const aboutButton = document.createElement('button');
@@ -38,6 +46,7 @@ function createNav() {
     aboutButton.addEventListener('click', () => {
         clearContent();
         loadAbout();
+        setActiveButton(aboutButton);
     });
 
     nav.appendChild(homeButton);
@@ -54,13 +63,21 @@ function clearContent() {
     }
 }
 
+function createFooter() {
+    const footer = document.createElement('footer');
+    footer.textContent = '© 2025 The Fancy Fork. All rights reserved.';
+    return footer;
+}
+
 // Initial page setup
 function initializePage() {
     const contentDiv = document.getElementById('content');
     const header = createHeader();
+    const footer = createFooter();
 
     // Insert header before the content div
     document.body.insertBefore(header, contentDiv);
+    document.body.appendChild(footer);
 
     // Load the home page content initially
     loadHome();

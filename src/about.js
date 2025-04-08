@@ -10,7 +10,12 @@ export default function loadAbout() {
     const description = document.createElement('p');
     description.textContent = 'We are passionate about delivering the best dining experience.';
 
+    const image = document.createElement('img');
+    image.src = 'https://via.placeholder.com/600x400'; // Replace with actual image URL
+    image.alt = 'About us';
+
     aboutDiv.appendChild(headline);
     aboutDiv.appendChild(description);
+    aboutDiv.appendChild(image);
     content.appendChild(aboutDiv);
 }
