@@ -104,23 +104,108 @@ li:hover {
 
 [data-tab-content] {
   display: none;
+  padding: 20px;
+  width: 100%;
 }
 
-.active[data-tab-content] {
+[data-tab-content].active {
   display: block;
 }
 
-.tab-content h1 {
-  font-family: var(--primary-font);
-  font-size: calc(3rem + 2vw);
-  text-align: center;
+.tab {
+  cursor: pointer;
+  padding: 12px 20px;
+  margin: 0 5px;
+  border-radius: 5px;
+  transition: all 0.3s ease;
 }
 
-.tab-content p {
-  font-weight: bolder;
-  font-family: var(--primary-font);
-  font-size: calc(1rem + 0.7vw);
-  text-align: center;
+.tab:not(.active) {
+  opacity: 0.7;
+}
+
+.tab.active {
+  background-color: var(--soft-red);
+  color: var(--light-gray);
+}
+
+#content {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: var(--off-white);
+}
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background-color: var(--white);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.sticky {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+}
+
+.restaurant-name {
+  font-size: 1.8rem;
+  font-family: var(--header-font);
+  color: var(--dark-brown);
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.hamburger div {
+  width: 25px;
+  height: 3px;
+  background-color: var(--dark-brown);
+  transition: all 0.3s ease;
+}
+
+@media screen and (max-width: 768px) {
+  .hamburger {
+    display: flex;
+  }
+
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: var(--white);
+    flex-direction: column;
+    padding: 2rem 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  .tab {
+    width: 100%;
+    text-align: center;
+    padding: 1rem;
+    margin: 0.5rem 0;
+  }
 }
 
 #home {
@@ -929,34 +1014,28 @@ footer {
   .hamburger {
     display: flex;
   }
-  .toggle .line1 {
-    transform: rotate(-45deg) translate(-5px, 6px);
-  }
 
-  .toggle .line2 {
-    opacity: 0;
-  }
-
-  .toggle .line3 {
-    transform: rotate(45deg) translate(-5px, -6px);
-  }
-
-  .links {
-    padding-top: 1rem;
+  .nav-links {
     display: none;
-    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
     width: 100%;
+    background-color: var(--white);
+    flex-direction: column;
+    padding: 2rem 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
-  .links li {
-    text-align: center;
-    padding: 0.5rem 1rem;
-  }
-  .links li:hover {
-    background: #555;
-    color: var(--light-gray);
-  }
-  .links.active {
+
+  .nav-links.active {
     display: flex;
+  }
+
+  .tab {
+    width: 100%;
+    text-align: center;
+    padding: 1rem;
+    margin: 0.5rem 0;
   }
 }
 

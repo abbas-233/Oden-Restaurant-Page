@@ -24,7 +24,7 @@ const initializePage = () => {
   contentContainer.appendChild(footer);
 
   // Load the initial page (Home)
-  renderHomePage.render(); // Assuming home.js exports { render }
+  renderHomePage.render();
 
   // Setup Event Listeners *after* elements are in the DOM
   setupEventListeners();
@@ -35,21 +35,31 @@ const renderPage = (pageName) => {
   const mainContent = document.getElementById("main-content");
   if (!mainContent) return; // Guard clause
 
-  mainContent.innerHTML = ""; // Clear previous page content
+  // Clear previous content
+  mainContent.innerHTML = "";
+
+  // Create and append the new content
+  const pageDiv = document.createElement("div");
+  pageDiv.setAttribute("id", pageName);
+  pageDiv.setAttribute("data-tab-content", "");
 
   switch (pageName) {
     case "home":
       renderHomePage.render();
       break;
     case "menu":
-      renderMenuPage.render(); // Assuming menu.js exports { render }
+      renderMenuPage.render();
       break;
     case "contact":
-      renderContactPage.render(); // Assuming contact.js exports { render }
+      renderContactPage.render();
       break;
     default:
       renderHomePage.render(); // Default to home
   }
+
+  // Add the active class to the new content
+  pageDiv.classList.add("active");
+  mainContent.appendChild(pageDiv);
 };
 
 // --- Event Listeners Setup ---
@@ -85,14 +95,7 @@ const setupEventListeners = () => {
       }
     });
   });
-
-  // Note: Event listeners for dynamic content (like contact form submit or menu button)
-  // should be attached *within* their respective render functions (e.g., in contact.js, menu.js)
-  // OR use event delegation on `mainContent` if preferred.
-  // The form reset logic previously here is removed as it should be in contact.js.
 };
 
 // --- Initialize the Application ---
 initializePage();
-
-console.log(`App initialized at ${new Date().toLocaleTimeString()}.`);
