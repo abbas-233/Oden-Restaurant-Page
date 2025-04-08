@@ -3,70 +3,97 @@ import { renderHomePage } from "./home";
 import { renderMenuPage } from "./menu";
 import { renderContactPage } from "./contact";
 
-// --- Core Elements ---
-const contentContainer = document.querySelector("#content");
+// Helper function to create elements with classes and attributes
+const createElement = (tag, classes = [], attributes = {}) => {
+  const element = document.createElement(tag);
+  if (Array.isArray(classes) && classes.length > 0) {
+    element.classList.add(...classes);
+  }
+  Object.entries(attributes).forEach(([key, value]) => {
+    element.setAttribute(key, value);
+  });
+  return element;
+};
 
-// --- Initial Page Setup ---
 const initializePage = () => {
-  // Clear any existing content (important if re-initializing)
+  const contentContainer = document.querySelector("#content");
+  if (!contentContainer) {
+    console.error("Content container not found");
+    return;
+  }
+
+  // Clear existing content
   contentContainer.innerHTML = "";
 
   // Create and append header and footer
   const header = createHeader();
   const footer = createFooter();
+
+  // Create main content area
+  const mainContent = createElement("main", ["main-content"]);
+
+  // Load initial page content
+  const homeContent = createElement("div", ["tab-content", "active"], {
+    id: "home",
+    "data-tab-content": ""
+  });
+  renderHomePage();
+  mainContent.appendChild(homeContent);
+
+  // Assemble the page
   contentContainer.appendChild(header);
-
-  // Create a main content area for dynamic pages
-  const mainContent = document.createElement("main");
-  mainContent.setAttribute("id", "main-content");
   contentContainer.appendChild(mainContent);
-
   contentContainer.appendChild(footer);
 
-  // Load the initial page (Home)
-  renderHomePage.render();
-
-  // Setup Event Listeners *after* elements are in the DOM
+  // Setup event listeners
   setupEventListeners();
 };
 
-// --- Page Rendering Logic ---
 const renderPage = (pageName) => {
   const mainContent = document.getElementById("main-content");
-  if (!mainContent) return; // Guard clause
-
-  // Clear previous content
-  mainContent.innerHTML = "";
-
-  // Create and append the new content
-  const pageDiv = document.createElement("div");
-  pageDiv.setAttribute("id", pageName);
-  pageDiv.setAttribute("data-tab-content", "");
-
-  switch (pageName) {
-    case "home":
-      renderHomePage.render();
-      break;
-    case "menu":
-      renderMenuPage.render();
-      break;
-    case "contact":
-      renderContactPage.render();
-      break;
-    default:
-      renderHomePage.render(); // Default to home
+  if (!mainContent) {
+    console.error("Main content container not found");
+    return;
   }
 
-  // Add the active class to the new content
-  pageDiv.classList.add("active");
-  mainContent.appendChild(pageDiv);
+  // Clear existing content
+  mainContent.innerHTML = "";
+
+  // Create new content container
+  const contentDiv = createElement("div", ["tab-content"], {
+    id: pageName,
+    "data-tab-content": ""
+  });
+
+  // Render the appropriate page
+  switch (pageName) {
+    case "home":
+      renderHomePage();
+      break;
+    case "menu":
+      renderMenuPage();
+      break;
+    case "contact":
+      renderContactPage();
+      break;
+    default:
+      renderHomePage();
+      break;
+  }
+
+  // Add active class and append to main content
+  contentDiv.classList.add("active");
+  mainContent.appendChild(contentDiv);
 };
 
-// --- Event Listeners Setup ---
 const setupEventListeners = () => {
+  const contentContainer = document.querySelector("#content");
+  if (!contentContainer) return;
+
   // Hamburger Menu
   const burger = contentContainer.querySelector(".hamburger");
   const navLinks = contentContainer.querySelector(".nav-links");
+  
   if (burger && navLinks) {
     burger.addEventListener("click", () => {
       navLinks.classList.toggle("active");
@@ -76,19 +103,21 @@ const setupEventListeners = () => {
 
   // Navigation Tabs
   const tabs = contentContainer.querySelectorAll(".tab");
-  tabs.forEach((tab) => {
-    tab.addEventListener("click", () => {
-      // Get the target page name (e.g., 'home', 'menu')
-      const targetId = tab.dataset.tabTarget.substring(1); // Remove #
-
-      // Remove active class from all tabs and add to the clicked one
-      tabs.forEach((t) => t.classList.remove("active"));
+  tabs.forEach(tab => {
+    tab.addEventListener("click", (e) => {
+      e.preventDefault();
+      
+      // Get target page from data attribute
+      const targetId = tab.dataset.tabTarget?.substring(1) || "home";
+      
+      // Update tab states
+      tabs.forEach(t => t.classList.remove("active"));
       tab.classList.add("active");
 
-      // Render the corresponding page
+      // Render new page
       renderPage(targetId);
 
-      // Close hamburger menu if open on mobile after clicking a link
+      // Close mobile menu if open
       if (navLinks.classList.contains("active")) {
         navLinks.classList.remove("active");
         burger.classList.remove("toggle");
@@ -97,5 +126,13 @@ const setupEventListeners = () => {
   });
 };
 
-// --- Initialize the Application ---
-initializePage();
+// Initialize the application
+document.addEventListener("DOMContentLoaded", () => {
+  // Initialize the app
+  initializePage();
+
+  // Optional: Add error handling
+  window.addEventListener("error", (error) => {
+    console.error("Application Error:", error);
+  });
+});
