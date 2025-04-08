@@ -1,51 +1,125 @@
 const renderHomePage = (() => {
-  //container
+  // Container
   const contentContainer = document.querySelector("#content");
 
-  const home = document.createElement("div");
-  home.classList.add("tab-content");
-  home.innerHTML = `
-  <div id="home" class="active" data-tab-content>
-    <div class="hero">
-      <img src="./images/oden-hero.jpg" alt="Simmering Oden Pot" class="hero-image" style="width: 100%; height: auto; object-fit: cover;" />
-      <div class="hero-text" style="text-align: center; padding: 20px;">
-        <h1 style="font-size: 2.5rem; margin-bottom: 10px;">Experience the Heartwarming Flavors of OdenY</h1>
-        <p style="font-size: 1.2rem; margin-bottom: 20px;">Authentic Japanese Oden, Crafted with Care.</p>
-        <a data-tab-target="#menu" class="cta-button" style="padding: 10px 20px; background-color: #ff6347; color: white; text-decoration: none; border-radius: 5px;">View Our Menu</a>
-      </div>
-    </div>
-    <div class="about" style="display: flex; align-items: center; gap: 20px; padding: 20px;">
-      <div class="about-image" style="flex: 1;">
-        <img src="./images/oden-about.jpg" alt="Oden Ingredients" style="width: 100%; height: auto; border-radius: 10px;" />
-      </div>
-      <div class="about-text" style="flex: 2;">
-        <h2 style="font-size: 2rem; margin-bottom: 10px;">About OdenY</h2>
-        <p style="font-size: 1rem; line-height: 1.5;">Oden is a traditional Japanese one-pot dish, simmered in a light, flavorful dashi broth. At OdenY, we use the freshest ingredients and a special broth recipe to bring you the comforting and social experience of enjoying Oden.</p>
-      </div>
-    </div>
-    <div class="featured-menu" style="padding: 20px;">
-      <h2 style="font-size: 2rem; text-align: center; margin-bottom: 20px;">Featured Menu Items</h2>
-      <div class="menu-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
-        <div class="menu-item" style="text-align: center;">
-          <img src="./images/daikon.jpg" alt="Daikon Radish" style="width: 100%; height: auto; border-radius: 10px;" />
-          <h3 style="font-size: 1.5rem; margin-top: 10px;">Daikon Radish</h3>
-          <p style="font-size: 1rem;">Simmered to perfection, this classic Oden ingredient is a must-try.</p>
-        </div>
-        <div class="menu-item" style="text-align: center;">
-          <img src="./images/fish-cake.jpg" alt="Fish Cake" style="width: 100%; height: auto; border-radius: 10px;" />
-          <h3 style="font-size: 1.5rem; margin-top: 10px;">Fish Cake</h3>
-          <p style="font-size: 1rem;">A flavorful addition to your Oden experience, made with fresh seafood.</p>
-        </div>
-        <div class="menu-item" style="text-align: center;">
-          <img src="./images/konnyaku.jpg" alt="Konnyaku" style="width: 100%; height: auto; border-radius: 10px;" />
-          <h3 style="font-size: 1.5rem; margin-top: 10px;">Konnyaku</h3>
-          <p style="font-size: 1rem;">A unique and healthy ingredient, perfect for soaking up the broth.</p>
-        </div>
-      </div>
-    </div>
-  </div>`;
+  // --- Helper function to create elements with classes and text ---
+  const createElement = (tag, classes = [], text = "") => {
+    const element = document.createElement(tag);
+    if (classes.length > 0) {
+      element.classList.add(...classes);
+    }
+    if (text) {
+      element.textContent = text;
+    }
+    return element;
+  };
 
-  contentContainer.appendChild(home);
+  // --- Create Hero Section ---
+  const createHeroSection = () => {
+    const hero = createElement("div", ["hero"]);
+
+    const heroImage = createElement("img", ["hero-image"]);
+    heroImage.src = "./images/oden-hero.jpg";
+    heroImage.alt = "Simmering Oden Pot";
+
+    const heroTextDiv = createElement("div", ["hero-text"]);
+    const heroTitle = createElement(
+      "h1",
+      [],
+      "Experience the Heartwarming Flavors of OdenY"
+    );
+    const heroSubtitle = createElement(
+      "p",
+      [],
+      "Authentic Japanese Oden, Crafted with Care."
+    );
+    const ctaButton = createElement("a", ["cta-button"], "View Our Menu");
+    ctaButton.dataset.tabTarget = "#menu"; // For tab switching logic
+
+    heroTextDiv.appendChild(heroTitle);
+    heroTextDiv.appendChild(heroSubtitle);
+    heroTextDiv.appendChild(ctaButton);
+
+    hero.appendChild(heroImage);
+    hero.appendChild(heroTextDiv);
+    return hero;
+  };
+
+  // --- Create About Section ---
+  const createAboutSection = () => {
+    const about = createElement("div", ["about"]);
+
+    const aboutImageDiv = createElement("div", ["about-image"]);
+    const aboutImage = createElement("img");
+    aboutImage.src = "./images/oden-about.jpg";
+    aboutImage.alt = "Oden Ingredients";
+    aboutImageDiv.appendChild(aboutImage);
+
+    const aboutTextDiv = createElement("div", ["about-text"]);
+    const aboutTitle = createElement("h2", [], "About OdenY");
+    const aboutParagraph = createElement(
+      "p",
+      [],
+      "Oden is a traditional Japanese one-pot dish, simmered in a light, flavorful dashi broth. At OdenY, we use the freshest ingredients and a special broth recipe to bring you the comforting and social experience of enjoying Oden."
+    );
+    aboutTextDiv.appendChild(aboutTitle);
+    aboutTextDiv.appendChild(aboutParagraph);
+
+    about.appendChild(aboutImageDiv);
+    about.appendChild(aboutTextDiv);
+    return about;
+  };
+
+  // --- Create Featured Menu Section (Structure Only) ---
+  // Note: Specific items might be dynamically loaded or static as needed
+  const createFeaturedMenuSection = () => {
+    const featuredMenu = createElement("div", ["featured-menu"]);
+    const featuredTitle = createElement(
+      "h2",
+      [],
+      "Featured Menu Items"
+    );
+    // Placeholder for actual menu items - add logic here if needed
+    const itemsPlaceholder = createElement(
+      "p",
+      [],
+      "(Featured items coming soon...)"
+    );
+    itemsPlaceholder.style.textAlign = "center"; // Example style if needed
+    itemsPlaceholder.style.fontStyle = "italic";
+
+    featuredMenu.appendChild(featuredTitle);
+    featuredMenu.appendChild(itemsPlaceholder); // Add items here later
+    return featuredMenu;
+  };
+
+  // --- Main Render Logic ---
+  const render = () => {
+    // Clear existing content
+    contentContainer.innerHTML = "";
+
+    // Create the main home container
+    const home = createElement("div", ["tab-content", "active"]);
+    home.setAttribute("id", "home");
+    home.setAttribute("data-tab-content", "");
+
+    // Create and append sections
+    const heroSection = createHeroSection();
+    const aboutSection = createAboutSection();
+    const featuredMenuSection = createFeaturedMenuSection();
+
+    home.appendChild(heroSection);
+    home.appendChild(aboutSection);
+    home.appendChild(featuredMenuSection);
+
+    // Append the generated home page to the main content container
+    contentContainer.appendChild(home);
+
+    // Note: Event listeners for tab switching are likely handled elsewhere (e.g., index.js or pageload.js)
+    // If the CTA button needs a specific listener here, add it.
+  };
+
+  return { render }; // Expose the render function
 })();
 
 export { renderHomePage };
