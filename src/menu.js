@@ -4,54 +4,55 @@ const renderMenuPage = (() => {
   const menu = document.createElement("div");
   menu.setAttribute("id", "menu");
   menu.setAttribute("data-tab-content", "");
+  // Updated menu layout for better organization and spacing
   menu.innerHTML = `
-  <div class="menu-page">
-    <h1>Our Menu</h1>
-    <div class="menu-section">
-      <h2>Vegetables</h2>
-      <div class="menu-item">
-        <h3>Daikon Radish</h3>
-        <p>Simmered to perfection in our special dashi broth.</p>
-        <span>$2.50</span>
+  <div class="menu-page" style="padding: 20px;">
+    <h1 style="text-align: center; font-size: 2.5rem; margin-bottom: 20px;">Our Menu</h1>
+    <div class="menu-section" style="margin-bottom: 20px;">
+      <h2 style="font-size: 2rem; margin-bottom: 10px;">Vegetables</h2>
+      <div class="menu-item" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+        <h3 style="font-size: 1.5rem;">Daikon Radish</h3>
+        <p style="flex: 1; margin: 0 10px;">Simmered to perfection in our special dashi broth.</p>
+        <span style="font-size: 1.2rem; font-weight: bold;">$2.50</span>
       </div>
-      <div class="menu-item">
-        <h3>Konnyaku</h3>
-        <p>A healthy and unique addition to your Oden experience.</p>
-        <span>$2.00</span>
+      <div class="menu-item" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+        <h3 style="font-size: 1.5rem;">Konnyaku</h3>
+        <p style="flex: 1; margin: 0 10px;">A healthy and unique addition to your Oden experience.</p>
+        <span style="font-size: 1.2rem; font-weight: bold;">$2.00</span>
+      </div>
+    </div>
+    <div class="menu-section" style="margin-bottom: 20px;">
+      <h2 style="font-size: 2rem; margin-bottom: 10px;">Meats</h2>
+      <div class="menu-item" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+        <h3 style="font-size: 1.5rem;">Beef Tendon</h3>
+        <p style="flex: 1; margin: 0 10px;">Tender and flavorful, a classic Oden favorite.</p>
+        <span style="font-size: 1.2rem; font-weight: bold;">$3.50</span>
+      </div>
+      <div class="menu-item" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+        <h3 style="font-size: 1.5rem;">Chicken Meatballs</h3>
+        <p style="flex: 1; margin: 0 10px;">Juicy and seasoned to perfection.</p>
+        <span style="font-size: 1.2rem; font-weight: bold;">$3.00</span>
+      </div>
+    </div>
+    <div class="menu-section" style="margin-bottom: 20px;">
+      <h2 style="font-size: 2rem; margin-bottom: 10px;">Seafood</h2>
+      <div class="menu-item" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+        <h3 style="font-size: 1.5rem;">Fish Cake</h3>
+        <p style="flex: 1; margin: 0 10px;">Fresh and flavorful, a must-try in Oden.</p>
+        <span style="font-size: 1.2rem; font-weight: bold;">$2.50</span>
+      </div>
+      <div class="menu-item" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+        <h3 style="font-size: 1.5rem;">Shrimp</h3>
+        <p style="flex: 1; margin: 0 10px;">Delicately cooked to enhance its natural sweetness.</p>
+        <span style="font-size: 1.2rem; font-weight: bold;">$4.00</span>
       </div>
     </div>
     <div class="menu-section">
-      <h2>Meats</h2>
-      <div class="menu-item">
-        <h3>Beef Tendon</h3>
-        <p>Tender and flavorful, a classic Oden favorite.</p>
-        <span>$3.50</span>
-      </div>
-      <div class="menu-item">
-        <h3>Chicken Meatballs</h3>
-        <p>Juicy and seasoned to perfection.</p>
-        <span>$3.00</span>
-      </div>
-    </div>
-    <div class="menu-section">
-      <h2>Seafood</h2>
-      <div class="menu-item">
-        <h3>Fish Cake</h3>
-        <p>Fresh and flavorful, a must-try in Oden.</p>
-        <span>$2.50</span>
-      </div>
-      <div class="menu-item">
-        <h3>Shrimp</h3>
-        <p>Delicately cooked to enhance its natural sweetness.</p>
-        <span>$4.00</span>
-      </div>
-    </div>
-    <div class="menu-section">
-      <h2>Eggs</h2>
-      <div class="menu-item">
-        <h3>Boiled Egg</h3>
-        <p>Perfectly cooked and infused with dashi flavor.</p>
-        <span>$1.50</span>
+      <h2 style="font-size: 2rem; margin-bottom: 10px;">Eggs</h2>
+      <div class="menu-item" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+        <h3 style="font-size: 1.5rem;">Boiled Egg</h3>
+        <p style="flex: 1; margin: 0 10px;">Perfectly cooked and infused with dashi flavor.</p>
+        <span style="font-size: 1.2rem; font-weight: bold;">$1.50</span>
       </div>
     </div>
   </div>`;
