@@ -1,4 +1,3 @@
-// Improved createHeader function
 const createHeader = () => {
   const header = document.createElement("header");
 
@@ -46,7 +45,6 @@ const createHeader = () => {
   return header;
 };
 
-// Improved createFooter function
 const createFooter = () => {
   const footer = document.createElement("footer");
 
@@ -64,4 +62,38 @@ const createFooter = () => {
   return footer;
 };
 
-export { createHeader, createFooter };
+const pageLoad = (() => {
+  const contentContainer = document.querySelector("#content");
+
+  const createHeader = () => {
+    const header = document.createElement("header");
+    header.innerHTML = `
+      <nav>
+        <h2>Food-on-a-Plate</h2>
+        <a href="#" class="hamburger">
+          <span class="line line1"></span>
+          <span class="line line2"></span>
+          <span class="line line3"></span>
+        </a>
+        <ul class="links">
+          <li data-tab-target="#home" class="tab red">Home</li>
+          <li data-tab-target="#menu" class="tab">Menu</li>
+          <li data-tab-target="#contact" class="tab">Contact us</li>
+        </ul>
+      </nav>`;
+    return header;
+  };
+
+  const render = () => {
+    // Clear existing content
+    contentContainer.innerHTML = "";
+
+    // Create and append header
+    const header = createHeader();
+    contentContainer.appendChild(header);
+  };
+
+  render();
+})();
+
+export { createHeader, createFooter, pageLoad };
