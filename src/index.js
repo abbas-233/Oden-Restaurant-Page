@@ -93,7 +93,7 @@ const setupEventListeners = () => {
       e.preventDefault();
 
       // Get target page from data attribute
-      const targetId = tab.dataset.tabTarget?.substring(1) || "home";
+      const targetId = (tab.dataset.tabTarget && tab.dataset.tabTarget.substring(1)) || "home";
 
       // Update tab states
       tabs.forEach((t) => t.classList.remove("active"));

@@ -10,15 +10,23 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
   },
-  "keywords": ["restaurant", "oden", "webpage"],
+  "keywords": [
+    "restaurant",
+    "oden",
+    "webpage"
+  ],
   "author": "Abbas",
   "license": "ISC",
   "devDependencies": {
+    "clean-webpack-plugin": "^4.0.0",
+    "css-loader": "^3.6.0",
+    "file-loader": "^6.2.0",
     "gh-pages": "^6.3.0",
-    "webpack": "^4.44.2",
-    "webpack-cli": "^3.3.12"
-  },
-  "dependencies": {
-    "normalize.css": "^8.0.1"
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^4.5.2",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.47.0",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.3"
   }
 }
